@@ -38,7 +38,7 @@ Please fill in the following table with the technologies you used in order to wo
 | Operating system (OS) | e.g. Ubuntu 20.04 |
 | Database  | e.g. MySQL 8.0|
 | Web server| e.g. Nginx |
-| PHP | e.g. 7.0 |
+| PHP | e.g. 7.4.12 |
 | IDE | e.g. PhpStorm |
 
 ### Testing
