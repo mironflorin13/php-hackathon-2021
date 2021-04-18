@@ -18,17 +18,23 @@ You have estimated it takes 4 weeks to build this solution. You have 2 days. Goo
 ### Data and Domain model
 In this section, please describe the main entities you managed to identify, the relationships between them and how you mapped them in the database.
 
-
-### Application architecture
-In this section, please provide a brief overview of the design of your application and highlight the main components and the interaction between them.
-
-Am gandit aplicatie ca avand o tablela de utilizatori, una ce va contine Programele si un ce va contine rezervarile pentru fiecare program in parte. 
+Am gandit aplicatia ca avand o tablela de utilizatori, una ce va contine Programele si un ce va contine rezervarile pentru fiecare program in parte. 
 
 Tabela de utilizatori va contine numele, emailul si parola
 
 Tabela de Programe va contine numele programlui,ora de inceput, ora de sfarsit, numarul de paricipanti si camera in care se va desfasura programul
 
 Tabela de rezervari va contine id utilizatorului daca acesta este conectat, CNP si id programului la care s-a facut programarea
+
+### Application architecture
+In this section, please provide a brief overview of the design of your application and highlight the main components and the interaction between them.
+
+Aplicatie are doi admini standard care se vor putea conect in aplicatie si vor avea posibilitatea sa creeze programe noi si de a le sterge 
+
+Utilizatori se vor putea inregistra si ei in aplicatie dar vor putea crea o rezervare doar daca introduc un CNP valid (acesta este necesar indiferent daca userul este conectat sau nu)
+totodata utilizatorul va putea sterge o rezervare daca introduce CNP-ul si id programului.
+
+
 
 
 ###  Implementation
