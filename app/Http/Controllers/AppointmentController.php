@@ -136,6 +136,7 @@ class AppointmentController extends Controller
                 'message' => 'There is no appointment with this id!'
             ];
         }
+        
         if( $a->CNP != $data['CNP'])
         {
             return [

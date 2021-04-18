@@ -23,18 +23,25 @@ In this section, please provide a brief overview of the design of your applicati
 For each of the following functionalities, please tick the box if you implemented it and describe its input and output in your application:
 
 [x] Brew coffee \
-[X] Create programme -> va primi numele programului , ora de inceput, ora de sfarsit si camera in care va avea loc
-                     ->va returna un mesaj in cazul in care o data introdusa nu trece de validare sau va returna programme-ul nou creat 
-[X] Delete programme ->va primi id-ul programme-ului pe care doresc sa il sterg 
-                     ->va returna 1 in caz de succes si 0 in cazul in care programmue-ul este deja sters
-[X] Book a programme  -> va primi CNP-ul utilizatorului, id-programului si daca este cazul id-ul utilizatorului 
-                     -> va returna un mesaj in cazul in care datele nu au fost introduse corect sau va afisa programarea facuta
+
+[X] Create programme 
+->va primi numele programului , ora de inceput, ora de sfarsit si camera in care va avea loc
+->va returna un mesaj in cazul in care o data introdusa nu trece de validare sau va returna programme-ul nou creat 
+
+[X] Delete programme
+->va primi id-ul programme-ului pe care doresc sa il sterg 
+->va returna 1 in caz de succes si 0 in cazul in care programmue-ul este deja sters
+
+[X] Book a programme
+-> va primi CNP-ul utilizatorului, id-programului si daca este cazul id-ul utilizatorului 
+-> va returna un mesaj in cazul in care datele nu au fost introduse corect sau va afisa programarea facuta
 
 ##### Business rules
 Please highlight all the validations and mechanisms you identified as necessary in order to avoid inconsistent states and apply the business logic in your application.
 
 Pentru ProgrammeController:
--in prima faza am restrictionat accesul inca din partea de rutare pentru rutele care apelau functii ce nu ar trebui sa fie accesibile doar pentru un utilizator atutentificat
+
+-in prima faza am restrictionat accesul inca din partea de rutare pentru rutele care apelau functii ce ar trebui sa fie accesibile doar pentru un utilizator atutentificat
 -apoi am veificat ca acel utilizator autentificat sa fie unul dintre cei 2 admini pe care ii are aplicatia verificand daca flagul admin este "true"
 
 
@@ -56,20 +63,48 @@ Please fill in the following table with the technologies you used in order to wo
 ### Testing
 In this section, please list the steps and/ or tools you've used in order to test the behaviour of your solution.
 
-Pentru fiecare functie nou scrisa am testat folosindu-ma de Postman cat mai multe cazuri posibile si verificat ca rezultatul sa fie cel corect
-In cazul in care ceva nu functiona corect ma intorceam la functia mea si folosindu-ma de return cautam sa vad de unde a plecat eroarea sau ce a faut ca functioa mea sa nu afizeze rezultatul asteptat.
+Pentru fiecare functie nou scrisa am testat folosindu-ma de Postman si introducand tot tipul de date care ar fi putul crea o eroare. 
+In cazul in care ceva nu functiona ma intorceam la functia mea si utilizand return cautam sa vad de unde a plecat eroarea sau ce a facut ca functia  mea sa nu afizeze rezultatul asteptat.
 
 ## Feedback
 In this section, please let us know what is your opinion about this experience and how we can improve it:
 
 1. Have you ever been involved in a similar experience? If so, how was this one different?
 
+Nu, nu am mai particiapat pana acum la un heckathone. Anul trecut am luat parte la un concurs ce presupunea carearea unei aplicatii la alegere tot in limbajul php doar ca aceia a avut timp de finalizare de 3 saptamani:) 
+
 2. Do you think this type of selection process is suitable for you?
+
+Da, genul acesta de proces de selectie se potriveste pentru mine deoarece se apropie foarte mult de ceia ce presupune munca de programator.
+
 3. What's your opinion about the complexity of the requirements?
+
+Pot spune ca pentru mine a avut o complexitate medie.
+
 4. What did you enjoy the most?
+
+Cel mai mult mi-a placut parta de validari.
+
 5. What was the most challenging part of this anti hackathon?
+
+Terminare aplicatiei in cele doua zile.
+
 6. Do you think the time limit was suitable for the requirements?
+
+Da. Aplicatia se poate realiza la un nivel decent in timpul cerut.
+
 7. Did you find the resources you were sent on your email useful?
+
+Nu m-am folosit de resursele trimise deoarece cunosteam in mare parte despre ce este vorba dar stiind ce aplicatii si tehnologii urmeaza sa folosesc m-a ajutat. 
+
 8. Is there anything you would like to improve to your current implementation?
+
+Pentru mine implementarea actuala a iesit destul de bine, cu timpul poate imi voi da seama unde ar mai trebui facute imbunatatiri.
+Poate ar fi trebuit sa fac si un program zilnic si sa ferific ca adminul sa nu poata crea programme in afara oreleor dein program.
+
 9. What would you change regarding this anti hackathon?
+
+In conditiile in care nu ar fi pandemie cred ca as vrea ca acesta sa se desfasoare la sediul firmei sau alta locatie.
+
+
 

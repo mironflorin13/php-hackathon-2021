@@ -124,12 +124,28 @@ class ProgrammeController extends Controller
         $start_dateAndHour_4hours = new DateTime($data['start_date']);
         $start_dateAndHour_4hours->modify('+4hours');
 
+        $sh = explode(" ",$data['start_date']);
+        $start_h = explode(':',$sh[1]);
+        $start_hour =intval($start_h[0]);
+
+        $eh = explode(" ",$data['end_date']);
+        $end_h = explode(':',$eh[1]);
+        $end_hour = intval($end_h[0]);
+
+        
         //verific ca ora de sfarsit sa fie mai mare decat ora de inceput
         if( $start_dateAndHour >= $end_dateAndHour )
         {
             return [
                 'message' => 'Error! End hour must be after start hour '
             ];   
+        }
+
+        //verific daca orele introduse sunt pe timp de zi si nu se face din greseala un program noaptea
+        if( $end_hour >= 23 || $start_hour <= 5 ){
+            return [
+                'message' => 'Error! You can make programme only between 6:00 and 23:00'
+            ];
         }
 
         //verific ca programul sa aiba o durata minima sa 30 de min 
@@ -140,7 +156,6 @@ class ProgrammeController extends Controller
             ];   
         }
 
-        
         //verific ca programul meu sa aiba o durata de maxim 4 ore
         if( $start_dateAndHour_4hours < $end_dateAndHour )
         {
