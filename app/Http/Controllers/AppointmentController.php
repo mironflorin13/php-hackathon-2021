@@ -23,7 +23,7 @@ class AppointmentController extends Controller
         return Appointment::all();
     }
 
-    //functie ce imi returneaza toate programele la care se pot face programari
+    //functie ce imi returneaza toate posibilele programele la care se pot face programari
     public function create()
     {
         return Programme::where('start_date','>',Carbon::now())->orderby('start_date')->get();
@@ -102,7 +102,7 @@ class AppointmentController extends Controller
         return Appointment::create($data);
     }
 
-    //functie ce imi va returna toate programarile pe care le are facute un utilizator in functie de cnp sau;
+    //functie ce imi va returna toate "programme"-ele la care s-a inregistrat utilizatorul in functie de cnp sau;
     public function showAll( $cnp )
     {
         $app = Appointment::where('CNP','=',$cnp)->get();
@@ -118,5 +118,30 @@ class AppointmentController extends Controller
         return [
             'message' => 'You not have appointments!'
         ];  
+    }
+    
+    //functie ce imi va stege o rezervare in functie de id
+    //functie trebuie sa primeasaca si un CNP
+    public function destroy($id)
+    {
+        $data =request()->validate([
+            'CNP' => 'required',
+        ]);
+        
+        $a = null;
+        $a = Appointment::where('id','=',$id)->first();
+        
+        if(!$a){
+            return [
+                'message' => 'There is no appointment with this id!'
+            ];
+        }
+        if( $a->CNP != $data['CNP'])
+        {
+            return [
+                'message' => 'The CNP does not metch!'
+            ];
+        }
+        return Appointment::destroy($id);
     }
 }

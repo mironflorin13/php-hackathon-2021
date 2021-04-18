@@ -12,6 +12,8 @@ Authentication is not an issue. It’s not required for users, as they can be re
 You have estimated it takes 4 weeks to build this solution. You have 2 days. Good luck!*
 
 ## Technical documentation
+
+    Pentru rularea aplicatiiei prima data se va rula comanda: " php artisan migrate " iar mai apoi se va rula comanda " php artisan db:seed " deoarece in fisierul DatabaseSeeder.php am creat doi admini standard : 'admin1@gmail.com' si 'admin2@gmail.com' ambii avand parola: 'password'
 ### Data and Domain model
 In this section, please describe the main entities you managed to identify, the relationships between them and how you mapped them in the database.
 ### Application architecture
@@ -21,33 +23,47 @@ In this section, please provide a brief overview of the design of your applicati
 For each of the following functionalities, please tick the box if you implemented it and describe its input and output in your application:
 
 [x] Brew coffee \
-[ ] Create programme \
-[ ] Delete programme \
-[ ] Book a programme 
+[X] Create programme -> va primi numele programului , ora de inceput, ora de sfarsit si camera in care va avea loc
+                     ->va returna un mesaj in cazul in care o data introdusa nu trece de validare sau va returna programme-ul nou creat 
+[X] Delete programme ->va primi id-ul programme-ului pe care doresc sa il sterg 
+                     ->va returna 1 in caz de succes si 0 in cazul in care programmue-ul este deja sters
+[X] Book a programme  -> va primi CNP-ul utilizatorului, id-programului si daca este cazul id-ul utilizatorului 
+                     -> va returna un mesaj in cazul in care datele nu au fost introduse corect sau va afisa programarea facuta
 
 ##### Business rules
 Please highlight all the validations and mechanisms you identified as necessary in order to avoid inconsistent states and apply the business logic in your application.
 
+Pentru ProgrammeController:
+-in prima faza am restrictionat accesul inca din partea de rutare pentru rutele care apelau functii ce nu ar trebui sa fie accesibile doar pentru un utilizator atutentificat
+-apoi am veificat ca acel utilizator autentificat sa fie unul dintre cei 2 admini pe care ii are aplicatia verificand daca flagul admin este "true"
+
+
 ##### 3rd party libraries (if applicable)
 Please give a brief review of the 3rd party libraries you used and how/ why you've integrated them into your project.
+
 
 ##### Environment
 Please fill in the following table with the technologies you used in order to work at your application. Feel free to add more rows if you want us to know about anything else you used.
 | Name | Choice |
 | ------ | ------ |
-| Operating system (OS) | e.g. Ubuntu 20.04 |
-| Database  | e.g. MySQL 8.0|
-| Web server| e.g. Nginx |
+| Operating system (OS) | e.g. Windows 10 Pro |
+| Database  | e.g. MySQL |
+| Web server| e.g. Apache |
 | PHP | e.g. 7.4.12 |
-| IDE | e.g. PhpStorm |
+| IDE | e.g. Visual Studio Code |
+| Framework | Laravel 8.37.0 |
 
 ### Testing
 In this section, please list the steps and/ or tools you've used in order to test the behaviour of your solution.
+
+Pentru fiecare functie nou scrisa am testat folosindu-ma de Postman cat mai multe cazuri posibile si verificat ca rezultatul sa fie cel corect
+In cazul in care ceva nu functiona corect ma intorceam la functia mea si folosindu-ma de return cautam sa vad de unde a plecat eroarea sau ce a faut ca functioa mea sa nu afizeze rezultatul asteptat.
 
 ## Feedback
 In this section, please let us know what is your opinion about this experience and how we can improve it:
 
 1. Have you ever been involved in a similar experience? If so, how was this one different?
+
 2. Do you think this type of selection process is suitable for you?
 3. What's your opinion about the complexity of the requirements?
 4. What did you enjoy the most?
