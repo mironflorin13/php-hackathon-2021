@@ -22,7 +22,7 @@ Route::POST('/login',[AuthController::class,'login']);
 Route::GET('/programme',[ProgrammeController::class,'index']);
 Route::GET('/programme/create',[ProgrammeController::class,'create']);
 
-Route::GET('/appointment',[AppointmentController::class,'index']);
+Route::GET('/appointment/{cnp}',[AppointmentController::class,'showAll']);
 Route::GET('/appointment/create',[AppointmentController::class,'create']);
 Route::POST('/appointment',[AppointmentController::class,'store']);
 
@@ -34,6 +34,8 @@ Route::group(['middleware' =>['auth:sanctum']],function()
     Route::DELETE('/programme/{id}',[ProgrammeController::class,'destroy']);
 
     Route::POST('/logout',[AuthController::class,'logout']);
+
+    Route::GET('/appointment',[AppointmentController::class,'index']);
 });
 
 

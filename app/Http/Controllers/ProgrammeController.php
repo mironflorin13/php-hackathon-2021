@@ -9,10 +9,12 @@ use App\Models\Programme;
 use App\Models\Appointment;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Http\Response;
+use Carbon\Carbon;
 
 class ProgrammeController extends Controller
 {
+
     //Array multidimensional ce contine toate camerele si ce activitati se pot realiza in respectiva camera
     private $rooms = array(
         'room1' => array('pilates'),
@@ -20,17 +22,40 @@ class ProgrammeController extends Controller
         'room3' => array('pilates','kangoo jumps'),
         'room4' => array('aerobic','butt and abs','full body workout')
     );
+
     //tipurile de activittati
     private $programmeTypes= ['pilates','kangoo jumps','aerobic','butt and abs','full body workout'];
+
+     //fucntie pentru afisarea tuturor "programme"-lor
+     public function index()
+     {
+         return Programme::where('start_date','>',Carbon::now())->orderby('start_date')->get();
+     }
     
+    //functie care imi va returna toate tipurile de camere si de programe disponibile
     public function create()
     {
+        if(auth()->user()->admin == "false")
+        {
+            $message = [
+                'message' => 'Error! You are not an admin! you can access this route!'
+            ];
+            return response($message, 401);
+        }
         return [$this->rooms,$this->programmeTypes];
     }
 
     //functie pentru crearea de "programme" nou
     public function store(Request $request)
     {
+        if(auth()->user()->admin == "false")
+        {
+            $message = [
+                'message' => 'Error! You are not an admin! you can access this route!'
+            ];
+            return response($message, 401);
+        }
+
         $data = $request->validate([
             'title' =>'required | max:100',
             'start_date' =>'required',
@@ -134,15 +159,18 @@ class ProgrammeController extends Controller
         ]);
     }
    
-    //fucntie pentru afisarea tuturor "programme"-lor
-    public function index()
-    {
-        return Programme::all();
-    }
+   
 
-    //sterg un program s toate programarile care au fost facute pentru acel program
+    //sterg Programme-ul si toate programarile care au fost facute pentru acel program
     public function destroy($id)
     {
+        if(auth()->user()->admin == "false")
+        {
+            $message = [
+                'message' => 'Error! You are not an admin! you can access this route!'
+            ];
+            return response($message, 401);
+        }
         Appointment::where('programme_id','=',$id)->delete();
         return Programme::destroy($id);
     }

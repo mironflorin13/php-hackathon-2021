@@ -15,19 +15,20 @@ class AuthController extends Controller
         $data = $request->validate([
             'name' =>'required | string',
             'email' =>'required | string | email |unique:users,email',
-            'password' =>'required |string | confirmed '
+            'password' =>'required | min:6 | regex:"/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/" | confirmed'
         ]);
 
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password'])
+            'password' => bcrypt($data['password']),
+            'admin' => 'false'        //toti noii useri vor fii de tip admin:'false' deoarece am creat deja prin seeds 2 conturi de admin si nu mai vreau altele noi
         ]);
 
         $token = $user->createToken('mytoken')->plainTextToken;
 
         $response = [
-            'user' =>  $user,
+            'user' => $user,
             'token' => $token
         ];
 
@@ -38,8 +39,8 @@ class AuthController extends Controller
      {
 
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => 'required | email',
+            'password' => 'required '
         ]);
     
         $user = User::where('email', $request->email)->first();
@@ -49,6 +50,7 @@ class AuthController extends Controller
                 'message' => 'Email or password are incorrect!'
             ];
         }
+        
         $token = $user->createToken('mytoken')->plainTextToken;
 
         $response = [
