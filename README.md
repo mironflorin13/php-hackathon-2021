@@ -13,11 +13,24 @@ You have estimated it takes 4 weeks to build this solution. You have 2 days. Goo
 
 ## Technical documentation
 
-    Pentru rularea aplicatiiei prima data se va rula comanda: " php artisan migrate " iar mai apoi se va rula comanda " php artisan db:seed " deoarece in fisierul DatabaseSeeder.php am creat doi admini standard : 'admin1@gmail.com' si 'admin2@gmail.com' ambii avand parola: 'password'
+!!!! Pentru rularea aplicatiiei prima data se va rula comanda: " php artisan migrate " iar mai apoi se va rula comanda " php artisan db:seed " deoarece in fisierul DatabaseSeeder.php am creat doi admini standard : 'admin1@gmail.com' si 'admin2@gmail.com' ambii avand parola: 'password'!!!
+    
 ### Data and Domain model
 In this section, please describe the main entities you managed to identify, the relationships between them and how you mapped them in the database.
+
+
 ### Application architecture
 In this section, please provide a brief overview of the design of your application and highlight the main components and the interaction between them.
+
+Am gandit aplicatie ca avand o tablela de utilizatori, una ce va contine Programele si un ce va contine rezervarile pentru fiecare program in parte. 
+
+Tabela de utilizatori va contine numele, emailul si parola
+
+Tabela de Programe va contine numele programlui,ora de inceput, ora de sfarsit, numarul de paricipanti si camera in care se va desfasura programul
+
+Tabela de rezervari va contine id utilizatorului daca acesta este conectat, CNP si id programului la care s-a facut programarea
+
+
 ###  Implementation
 ##### Functionalities
 For each of the following functionalities, please tick the box if you implemented it and describe its input and output in your application:
@@ -42,7 +55,13 @@ Please highlight all the validations and mechanisms you identified as necessary 
 Pentru ProgrammeController:
 
 -in prima faza am restrictionat accesul inca din partea de rutare pentru rutele care apelau functii ce ar trebui sa fie accesibile doar pentru un utilizator atutentificat
+
 -apoi am veificat ca acel utilizator autentificat sa fie unul dintre cei 2 admini pe care ii are aplicatia verificand daca flagul admin este "true"
+
+-pentru fiecare tip de date intoduse am verificat sa respecte anumite standarde
+
+-inainte de a crea un 'Programme' nou am verificat ca acestea sa nu se suprapuna cu alte Programe deja create
+
 
 
 ##### 3rd party libraries (if applicable)
